@@ -9,7 +9,7 @@ import urllib
 import http.cookiejar as cookielib
 import urllib.request as urllib2
 import urllib.parse
-from HelloAnalytics import get_report,initialize_analyticsreporting,print_response
+from HelloAnalytics import get_report,initialize_analyticsreporting,print_response,get_users
 logging.basicConfig(filename='logs.log',level=logging.DEBUG)
 app = Flask(__name__)
 
@@ -66,28 +66,7 @@ def fetch_users():
     VIEW_ID = '282345821'
     analytics = initialize_analyticsreporting()
     resp= get_report(analytics)
-    print_response(resp)
-    a=resp['reports'][0]['data']
-    a.keys()
-    x=a.values()
-    print(type(x))
-    k=[]
-    for i in x:
-      k.append(i)
-      #print(";",i)
-    b=k[3]
-    print(type(b))
-    for i in b:
-      print(";",i)
-    c=b[0]
-    print(c['values'][0])
-    #k=[]
-    for e in a:
-      k.append(e)
-    print(k[1])
-    p=k[1][0]
-    print(p['values'][1])
-    return "the number of visitors fetched is  "+p['values'][1]
+    return "the number of visitors fetched is  "+get_users(resp)
 
 
 #Request with oauth
